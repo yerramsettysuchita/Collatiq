@@ -1,0 +1,80 @@
+/* ── AUTH BADGE — fixed strip at very top ────────────────────────────────── */
+.auth-badge {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 9000;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  height: 40px;
+}
+
+.auth-badge-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2.4rem;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.auth-badge-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.auth-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sanction);
+  flex-shrink: 0;
+}
+
+.auth-badge-email {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.auth-badge-signout {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.auth-badge-signout:hover {
+  border-color: rgba(255,255,255,0.45);
+  color: #fff;
+}
+
+/* ── Offset: push all content below the 40 px badge ─────────────────────── */
+.app-auth-offset {
+  padding-top: 40px;
+}
+
+/* ── Re-anchor sticky inner topbars so they don't hide under the badge ───── */
+.app-auth-offset .ra-topbar,
+.app-auth-offset .input-topbar,
+.app-auth-offset .cv-topbar {
+  top: 40px;
+}
+
+/* ── Mobile: tighten padding ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .auth-badge-inner { padding: 0 1rem; }
+  .auth-badge-email { max-width: 160px; }
+}

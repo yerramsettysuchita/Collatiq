@@ -1,0 +1,20 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.badge--draft       { background: var(--paper-2); color: var(--ink-3); }
+.badge--submitted   { background: var(--accent-bg); color: var(--accent); }
+.badge--review      { background: var(--conditional-bg); color: var(--conditional); }
+.badge--pending     { background: var(--conditional-bg); color: var(--conditional); }
+.badge--approved    { background: var(--sanction-bg); color: var(--sanction); }
+.badge--conditional { background: var(--conditional-bg); color: var(--conditional); }
+.badge--rejected    { background: var(--highrisk-bg); color: var(--highrisk); }
+.badge--closed      { background: var(--paper-2); color: var(--ink-4); }

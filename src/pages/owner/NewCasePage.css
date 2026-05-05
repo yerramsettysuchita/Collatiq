@@ -1,0 +1,55 @@
+.nc-form { max-width: 560px; }
+.nc-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.nc-form-error {
+  background: var(--highrisk-bg); border: 1px solid var(--highrisk-border); border-radius: 6px;
+  color: var(--highrisk); font-size: 13px; padding: 10px 14px; margin-bottom: 20px;
+}
+.nc-type-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.nc-type-btn {
+  display: flex; flex-direction: column; align-items: center;
+  border: 1px solid var(--rule-2); border-radius: 8px;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--sans); font-size: 13px;
+  padding: 10px 18px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.nc-type-btn:hover { border-color: var(--accent); background: var(--paper-2); }
+.nc-type-btn.active {
+  border-color: var(--accent); background: var(--accent);
+  color: #fff;
+}
+.nc-type-btn--sm { padding: 7px 14px; font-size: 12px; }
+.nc-type-sub { font-size: 10px; color: inherit; opacity: 0.7; margin-top: 2px; }
+.nc-type-btn.active .nc-type-sub { opacity: 0.85; }
+.nc-actions { display: flex; gap: 12px; margin-top: 28px; }
+
+/* Processing phase */
+.step-spinner {
+  border: 2px solid rgba(45,58,140,0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: nc-spin 0.7s linear infinite;
+}
+@keyframes nc-spin { to { transform: rotate(360deg); } }
+
+.nc-processing {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 60px 24px; max-width: 480px; margin: 0 auto;
+}
+.nc-proc-icon { margin-bottom: 20px; }
+.nc-proc-title {
+  font-family: var(--serif); font-size: 22px; color: var(--ink);
+  margin-bottom: 28px; letter-spacing: -0.02em;
+}
+.nc-proc-steps { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.nc-proc-step { display: flex; align-items: flex-start; gap: 10px; }
+.nc-proc-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+  background: var(--ink-6);
+  transition: background 0.2s;
+}
+.nc-proc-step.active .nc-proc-dot { background: var(--accent); }
+.nc-proc-step.done .nc-proc-dot   { background: var(--sanction); }
+.nc-proc-label { font-size: 13px; color: var(--ink-3); line-height: 1.5; }
+.nc-proc-step.active .nc-proc-label { color: var(--ink); }
+.nc-proc-step.done .nc-proc-label  { color: var(--ink-4); }
