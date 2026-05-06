@@ -263,6 +263,116 @@ export const VISAKHAPATNAM_ZONES = [
   { name: 'Gajuwaka',        lat: 17.6892, lng: 83.2157, radiusKm: 2.5, ratePerSqft: 4500  },
 ];
 
+export const THIRUVANANTHAPURAM_ZONES = [
+  { name: 'Kowdiar',          lat: 8.5041,  lng: 76.9447, radiusKm: 2.0, ratePerSqft: 9500  },
+  { name: 'Palayam',          lat: 8.4977,  lng: 76.9477, radiusKm: 1.5, ratePerSqft: 8500  },
+  { name: 'Pattom',           lat: 8.5153,  lng: 76.9496, radiusKm: 2.0, ratePerSqft: 8000  },
+  { name: 'Kesavadasapuram',  lat: 8.5054,  lng: 76.9382, radiusKm: 2.0, ratePerSqft: 7000  },
+  { name: 'Technopark',       lat: 8.5526,  lng: 76.8824, radiusKm: 3.0, ratePerSqft: 5500  },
+];
+
+export const MYSURU_ZONES = [
+  { name: 'VV Mohalla',       lat: 12.3007, lng: 76.6387, radiusKm: 2.0, ratePerSqft: 7500  },
+  { name: 'Saraswathipuram',  lat: 12.3126, lng: 76.6214, radiusKm: 2.0, ratePerSqft: 6500  },
+  { name: 'Kuvempunagar',     lat: 12.2952, lng: 76.6284, radiusKm: 2.0, ratePerSqft: 5500  },
+  { name: 'JP Nagar Mysuru',  lat: 12.3247, lng: 76.6148, radiusKm: 2.5, ratePerSqft: 5000  },
+  { name: 'Hebbal Mysuru',    lat: 12.3594, lng: 76.6186, radiusKm: 2.5, ratePerSqft: 4500  },
+];
+
+export const MANGALURU_ZONES = [
+  { name: 'Hampankatta',      lat: 12.8688, lng: 74.8442, radiusKm: 1.5, ratePerSqft: 9000  },
+  { name: 'Kadri',            lat: 12.8793, lng: 74.8466, radiusKm: 2.0, ratePerSqft: 7500  },
+  { name: 'Bejai',            lat: 12.8810, lng: 74.8305, radiusKm: 2.0, ratePerSqft: 6500  },
+  { name: 'Mangaladevi',      lat: 12.8599, lng: 74.8466, radiusKm: 1.5, ratePerSqft: 6000  },
+  { name: 'Kulur',            lat: 12.8741, lng: 74.8219, radiusKm: 2.5, ratePerSqft: 5000  },
+];
+
+export const NASHIK_ZONES = [
+  { name: 'College Road',     lat: 20.0106, lng: 73.7903, radiusKm: 2.0, ratePerSqft: 8500  },
+  { name: 'Gangapur Road',    lat: 20.0059, lng: 73.7573, radiusKm: 2.5, ratePerSqft: 7000  },
+  { name: 'Cidco Nashik',     lat: 19.9836, lng: 73.7953, radiusKm: 2.5, ratePerSqft: 5500  },
+  { name: 'Nashik Road',      lat: 19.9697, lng: 73.8166, radiusKm: 2.5, ratePerSqft: 5000  },
+  { name: 'Satpur',           lat: 19.9975, lng: 73.7528, radiusKm: 2.5, ratePerSqft: 4500  },
+];
+
+export const AURANGABAD_ZONES = [
+  { name: 'Samarth Nagar',    lat: 19.8762, lng: 75.3433, radiusKm: 2.0, ratePerSqft: 6000  },
+  { name: 'Osmanpura',        lat: 19.8751, lng: 75.3607, radiusKm: 2.0, ratePerSqft: 5000  },
+  { name: 'Cidco Aurangabad', lat: 19.8459, lng: 75.3487, radiusKm: 3.0, ratePerSqft: 4500  },
+  { name: 'N-8 Cidco',        lat: 19.8635, lng: 75.3173, radiusKm: 2.5, ratePerSqft: 4000  },
+];
+
+export const RAJKOT_ZONES = [
+  { name: 'Raiya Road',       lat: 22.3105, lng: 70.7844, radiusKm: 2.5, ratePerSqft: 5500  },
+  { name: 'Kalawad Road',     lat: 22.3276, lng: 70.7583, radiusKm: 2.5, ratePerSqft: 5000  },
+  { name: 'Mavdi',            lat: 22.2837, lng: 70.7754, radiusKm: 2.0, ratePerSqft: 4500  },
+  { name: '150 Ft Ring Road', lat: 22.2960, lng: 70.8017, radiusKm: 2.5, ratePerSqft: 4000  },
+];
+
+export const AMRITSAR_ZONES = [
+  { name: 'Lawrence Road',    lat: 31.6340, lng: 74.8723, radiusKm: 2.0, ratePerSqft: 9500  },
+  { name: 'Ranjit Avenue',    lat: 31.6490, lng: 74.8686, radiusKm: 2.5, ratePerSqft: 7500  },
+  { name: 'Civil Lines Amritsar', lat: 31.6425, lng: 74.8574, radiusKm: 2.0, ratePerSqft: 6500 },
+  { name: 'GT Road Amritsar', lat: 31.6254, lng: 74.9031, radiusKm: 3.0, ratePerSqft: 5000  },
+];
+
+export const LUDHIANA_ZONES = [
+  { name: 'Model Town Ludhiana', lat: 30.9138, lng: 75.8424, radiusKm: 2.5, ratePerSqft: 9000 },
+  { name: 'BRS Nagar',        lat: 30.9024, lng: 75.8313, radiusKm: 2.0, ratePerSqft: 7500  },
+  { name: 'Sarabha Nagar',    lat: 30.8993, lng: 75.8610, radiusKm: 2.0, ratePerSqft: 6500  },
+  { name: 'Dugri',            lat: 30.8848, lng: 75.8499, radiusKm: 2.5, ratePerSqft: 5500  },
+];
+
+export const VARANASI_ZONES = [
+  { name: 'Sigra',            lat: 25.3338, lng: 82.9898, radiusKm: 2.0, ratePerSqft: 7000  },
+  { name: 'Lanka',            lat: 25.2677, lng: 82.9912, radiusKm: 2.0, ratePerSqft: 6500  },
+  { name: 'Bhelupur',         lat: 25.3090, lng: 82.9798, radiusKm: 2.0, ratePerSqft: 6000  },
+  { name: 'Sarnath',          lat: 25.3816, lng: 83.0237, radiusKm: 2.5, ratePerSqft: 4500  },
+];
+
+export const PATNA_ZONES = [
+  { name: 'Fraser Road',      lat: 25.6108, lng: 85.1423, radiusKm: 1.5, ratePerSqft: 9000  },
+  { name: 'Boring Road',      lat: 25.6155, lng: 85.0974, radiusKm: 2.5, ratePerSqft: 7000  },
+  { name: 'Bailey Road',      lat: 25.6251, lng: 85.0835, radiusKm: 3.0, ratePerSqft: 6000  },
+  { name: 'Kankarbagh',       lat: 25.5943, lng: 85.1462, radiusKm: 2.5, ratePerSqft: 5000  },
+];
+
+export const BHUBANESWAR_ZONES = [
+  { name: 'Saheed Nagar',     lat: 20.2710, lng: 85.8534, radiusKm: 2.0, ratePerSqft: 8000  },
+  { name: 'Nayapalli',        lat: 20.2871, lng: 85.8200, radiusKm: 2.0, ratePerSqft: 7000  },
+  { name: 'Chandrasekharpur', lat: 20.3074, lng: 85.8189, radiusKm: 2.5, ratePerSqft: 6500  },
+  { name: 'Patia',            lat: 20.3396, lng: 85.8155, radiusKm: 2.5, ratePerSqft: 5500  },
+  { name: 'Infocity',         lat: 20.3519, lng: 85.8044, radiusKm: 2.5, ratePerSqft: 5000  },
+];
+
+export const RAIPUR_ZONES = [
+  { name: 'Civil Lines Raipur', lat: 21.2514, lng: 81.6296, radiusKm: 2.0, ratePerSqft: 7000 },
+  { name: 'Shankar Nagar',    lat: 21.2636, lng: 81.6052, radiusKm: 2.0, ratePerSqft: 5500  },
+  { name: 'Avanti Vihar',     lat: 21.2316, lng: 81.6181, radiusKm: 2.5, ratePerSqft: 4500  },
+  { name: 'Telibandha',       lat: 21.2237, lng: 81.6398, radiusKm: 2.5, ratePerSqft: 4000  },
+];
+
+export const GUWAHATI_ZONES = [
+  { name: 'Silpukhuri',       lat: 26.1796, lng: 91.7381, radiusKm: 1.5, ratePerSqft: 7000  },
+  { name: 'Bhangagarh',       lat: 26.1775, lng: 91.7676, radiusKm: 2.0, ratePerSqft: 6000  },
+  { name: 'Panjabari',        lat: 26.1475, lng: 91.7937, radiusKm: 2.5, ratePerSqft: 5000  },
+  { name: 'Beltola',          lat: 26.1318, lng: 91.7781, radiusKm: 2.5, ratePerSqft: 4500  },
+];
+
+export const JODHPUR_ZONES = [
+  { name: 'Sardarpura',       lat: 26.2936, lng: 73.0269, radiusKm: 2.0, ratePerSqft: 7000  },
+  { name: 'Shastri Nagar',    lat: 26.3053, lng: 73.0131, radiusKm: 2.0, ratePerSqft: 6000  },
+  { name: 'Paota',            lat: 26.2979, lng: 73.0014, radiusKm: 2.0, ratePerSqft: 5500  },
+  { name: 'Residency Road Jodhpur', lat: 26.2846, lng: 73.0241, radiusKm: 2.0, ratePerSqft: 4500 },
+];
+
+export const MADURAI_ZONES = [
+  { name: 'Anna Nagar Madurai', lat: 9.9252, lng: 78.1198, radiusKm: 2.0, ratePerSqft: 7000 },
+  { name: 'KK Nagar',          lat: 9.9195, lng: 78.1057, radiusKm: 2.0, ratePerSqft: 6000  },
+  { name: 'Alagar Kovil Road', lat: 9.9568, lng: 78.1339, radiusKm: 3.0, ratePerSqft: 5000  },
+  { name: 'Mattuthavani',      lat: 9.9376, lng: 78.1264, radiusKm: 2.0, ratePerSqft: 4500  },
+];
+
 /* ── CITY BOUNDING BOXES ──────────────────────────────────────────────────── */
 export const ALL_CITY_ZONES = [
   { name: 'Bengaluru',      abbr: 'BLR', center: [12.9716, 77.5946], zoom: 11, zones: BENGALURU_ZONES     },
@@ -283,7 +393,22 @@ export const ALL_CITY_ZONES = [
   { name: 'Chandigarh',     abbr: 'IXC', center: [30.7333, 76.7794], zoom: 11, zones: CHANDIGARH_ZONES    },
   { name: 'Coimbatore',     abbr: 'CJB', center: [11.0168, 76.9558], zoom: 11, zones: COIMBATORE_ZONES    },
   { name: 'Bhopal',         abbr: 'BHO', center: [23.2599, 77.4126], zoom: 11, zones: BHOPAL_ZONES        },
-  { name: 'Visakhapatnam',  abbr: 'VTZ', center: [17.6868, 83.2185], zoom: 11, zones: VISAKHAPATNAM_ZONES },
+  { name: 'Visakhapatnam',      abbr: 'VTZ', center: [17.6868, 83.2185], zoom: 11, zones: VISAKHAPATNAM_ZONES     },
+  { name: 'Thiruvananthapuram', abbr: 'TRV', center: [8.5241,  76.9366], zoom: 11, zones: THIRUVANANTHAPURAM_ZONES },
+  { name: 'Mysuru',             abbr: 'MYS', center: [12.2958, 76.6394], zoom: 11, zones: MYSURU_ZONES             },
+  { name: 'Mangaluru',          abbr: 'IXE', center: [12.9141, 74.8560], zoom: 11, zones: MANGALURU_ZONES          },
+  { name: 'Nashik',             abbr: 'ISK', center: [19.9975, 73.7898], zoom: 11, zones: NASHIK_ZONES             },
+  { name: 'Aurangabad',         abbr: 'IXU', center: [19.8762, 75.3433], zoom: 11, zones: AURANGABAD_ZONES         },
+  { name: 'Rajkot',             abbr: 'RAJ', center: [22.3039, 70.8022], zoom: 11, zones: RAJKOT_ZONES             },
+  { name: 'Amritsar',           abbr: 'ATQ', center: [31.6340, 74.8723], zoom: 11, zones: AMRITSAR_ZONES           },
+  { name: 'Ludhiana',           abbr: 'LUH', center: [30.9010, 75.8573], zoom: 11, zones: LUDHIANA_ZONES           },
+  { name: 'Varanasi',           abbr: 'VNS', center: [25.3176, 82.9739], zoom: 11, zones: VARANASI_ZONES           },
+  { name: 'Patna',              abbr: 'PAT', center: [25.5941, 85.1376], zoom: 11, zones: PATNA_ZONES              },
+  { name: 'Bhubaneswar',        abbr: 'BBI', center: [20.2961, 85.8245], zoom: 11, zones: BHUBANESWAR_ZONES        },
+  { name: 'Raipur',             abbr: 'RPR', center: [21.2514, 81.6296], zoom: 11, zones: RAIPUR_ZONES             },
+  { name: 'Guwahati',           abbr: 'GAU', center: [26.1445, 91.7362], zoom: 11, zones: GUWAHATI_ZONES           },
+  { name: 'Jodhpur',            abbr: 'JDH', center: [26.2389, 73.0243], zoom: 11, zones: JODHPUR_ZONES            },
+  { name: 'Madurai',            abbr: 'IXM', center: [9.9252,  78.1198], zoom: 11, zones: MADURAI_ZONES            },
 ];
 
 const CITY_CONFIGS = [
@@ -305,7 +430,22 @@ const CITY_CONFIGS = [
   { name: 'Chandigarh',    zones: CHANDIGARH_ZONES,    bounds: { latMin: 30.60, latMax: 30.90, lngMin: 76.65, lngMax: 76.95 }, fallbackRate: 6500 },
   { name: 'Coimbatore',    zones: COIMBATORE_ZONES,    bounds: { latMin: 10.90, latMax: 11.15, lngMin: 76.85, lngMax: 77.15 }, fallbackRate: 4500 },
   { name: 'Bhopal',        zones: BHOPAL_ZONES,        bounds: { latMin: 23.10, latMax: 23.40, lngMin: 77.30, lngMax: 77.60 }, fallbackRate: 4000 },
-  { name: 'Visakhapatnam', zones: VISAKHAPATNAM_ZONES, bounds: { latMin: 17.60, latMax: 17.85, lngMin: 83.15, lngMax: 83.45 }, fallbackRate: 4500 },
+  { name: 'Visakhapatnam',      zones: VISAKHAPATNAM_ZONES,      bounds: { latMin: 17.60, latMax: 17.85, lngMin: 83.15, lngMax: 83.45 }, fallbackRate: 4500 },
+  { name: 'Thiruvananthapuram', zones: THIRUVANANTHAPURAM_ZONES, bounds: { latMin: 8.40,  latMax: 8.65,  lngMin: 76.82, lngMax: 77.05 }, fallbackRate: 6500 },
+  { name: 'Mysuru',             zones: MYSURU_ZONES,             bounds: { latMin: 12.22, latMax: 12.45, lngMin: 76.55, lngMax: 76.75 }, fallbackRate: 4500 },
+  { name: 'Mangaluru',          zones: MANGALURU_ZONES,          bounds: { latMin: 12.80, latMax: 13.00, lngMin: 74.78, lngMax: 74.95 }, fallbackRate: 5000 },
+  { name: 'Nashik',             zones: NASHIK_ZONES,             bounds: { latMin: 19.92, latMax: 20.10, lngMin: 73.70, lngMax: 73.95 }, fallbackRate: 5000 },
+  { name: 'Aurangabad',         zones: AURANGABAD_ZONES,         bounds: { latMin: 19.80, latMax: 19.96, lngMin: 75.25, lngMax: 75.45 }, fallbackRate: 4000 },
+  { name: 'Rajkot',             zones: RAJKOT_ZONES,             bounds: { latMin: 22.22, latMax: 22.42, lngMin: 70.70, lngMax: 70.90 }, fallbackRate: 4000 },
+  { name: 'Amritsar',           zones: AMRITSAR_ZONES,           bounds: { latMin: 31.58, latMax: 31.72, lngMin: 74.82, lngMax: 74.98 }, fallbackRate: 5500 },
+  { name: 'Ludhiana',           zones: LUDHIANA_ZONES,           bounds: { latMin: 30.84, latMax: 30.98, lngMin: 75.77, lngMax: 75.92 }, fallbackRate: 5500 },
+  { name: 'Varanasi',           zones: VARANASI_ZONES,           bounds: { latMin: 25.22, latMax: 25.43, lngMin: 82.90, lngMax: 83.10 }, fallbackRate: 4500 },
+  { name: 'Patna',              zones: PATNA_ZONES,              bounds: { latMin: 25.55, latMax: 25.70, lngMin: 85.04, lngMax: 85.22 }, fallbackRate: 4500 },
+  { name: 'Bhubaneswar',        zones: BHUBANESWAR_ZONES,        bounds: { latMin: 20.22, latMax: 20.40, lngMin: 85.77, lngMax: 85.93 }, fallbackRate: 5000 },
+  { name: 'Raipur',             zones: RAIPUR_ZONES,             bounds: { latMin: 21.17, latMax: 21.35, lngMin: 81.55, lngMax: 81.75 }, fallbackRate: 4000 },
+  { name: 'Guwahati',           zones: GUWAHATI_ZONES,           bounds: { latMin: 26.08, latMax: 26.25, lngMin: 91.65, lngMax: 91.88 }, fallbackRate: 4000 },
+  { name: 'Jodhpur',            zones: JODHPUR_ZONES,            bounds: { latMin: 26.18, latMax: 26.38, lngMin: 72.95, lngMax: 73.10 }, fallbackRate: 4000 },
+  { name: 'Madurai',            zones: MADURAI_ZONES,            bounds: { latMin: 9.85,  latMax: 10.05, lngMin: 78.05, lngMax: 78.25 }, fallbackRate: 4000 },
 ];
 
 /* ── CIRCLE RATE LOOKUP (Multi-city Haversine micromarket + fallback) ──── */
@@ -333,37 +473,70 @@ export function getCircleRateForLocation(lat, lng) {
   return { ratePerSqft: 5000, zone: 'Outside Coverage', confidence: 'low', fallback: true };
 }
 
+/* ── HELPERS ─────────────────────────────────────────────────────────────── */
+function getCenter(el) {
+  if (el.type === 'node') return { lat: el.lat, lng: el.lon };
+  if (el.center) return { lat: el.center.lat, lng: el.center.lon };
+  return null;
+}
+
+function nearestDistM(elements, lat, lng) {
+  let best = Infinity;
+  for (const el of elements) {
+    const c = getCenter(el);
+    if (!c) continue;
+    const d = haversineMetres(lat, lng, c.lat, c.lng);
+    if (d < best) best = d;
+  }
+  return best === Infinity ? null : Math.round(best);
+}
+
 /* ── OVERPASS INFRASTRUCTURE SIGNALS ────────────────────────────────────── */
 export async function fetchInfrastructureSignals(lat, lng) {
-  const cacheKey = `${lat.toFixed(3)}_${lng.toFixed(3)}`;
+  const cacheKey = `infra_${lat.toFixed(3)}_${lng.toFixed(3)}`;
   if (GEO_CACHE[cacheKey]) return GEO_CACHE[cacheKey];
 
-  const query = `[out:json][timeout:10];
+  // Comprehensive multi-radius query capturing every signal that affects property value
+  const query = `[out:json][timeout:18];
 (
-  node["amenity"~"hospital|clinic"](around:1200,${lat},${lng});
-  way["amenity"~"hospital|clinic"](around:1200,${lat},${lng});
-  node["amenity"~"school|college"](around:1200,${lat},${lng});
-  way["amenity"~"school|college"](around:1200,${lat},${lng});
-  node["railway"="station"](around:1200,${lat},${lng});
-  way["railway"="station"](around:1200,${lat},${lng});
-  node["highway"="bus_stop"](around:1200,${lat},${lng});
+  node["amenity"~"hospital|clinic"](around:2500,${lat},${lng});
+  way["amenity"~"hospital|clinic"](around:2500,${lat},${lng});
+  node["amenity"="pharmacy"](around:1000,${lat},${lng});
+  node["amenity"~"school|college|university"](around:2000,${lat},${lng});
+  way["amenity"~"school|college|university"](around:2000,${lat},${lng});
+  node["railway"="station"](around:3500,${lat},${lng});
+  node["station"="subway"](around:3500,${lat},${lng});
+  node["railway"="tram_stop"](around:3500,${lat},${lng});
+  node["highway"="bus_stop"](around:800,${lat},${lng});
   node["amenity"~"bank|atm"](around:1200,${lat},${lng});
-  way["amenity"~"bank|atm"](around:1200,${lat},${lng});
-  node["shop"~"supermarket|mall"](around:1200,${lat},${lng});
-  way["shop"~"supermarket|mall"](around:1200,${lat},${lng});
-  way["highway"~"primary|secondary|residential"](around:1200,${lat},${lng});
+  way["amenity"="bank"](around:1200,${lat},${lng});
+  node["shop"~"supermarket|mall|department_store"](around:2000,${lat},${lng});
+  way["shop"~"supermarket|mall"](around:2000,${lat},${lng});
+  node["leisure"~"park|garden|playground"](around:1200,${lat},${lng});
+  way["leisure"~"park|garden"](around:1200,${lat},${lng});
+  node["amenity"~"restaurant|cafe|fast_food|food_court"](around:600,${lat},${lng});
+  node["amenity"~"gym|sports_centre|fitness_centre"](around:1500,${lat},${lng});
+  way["landuse"="industrial"](around:1000,${lat},${lng});
+  way["highway"~"primary|trunk|motorway"](around:600,${lat},${lng});
+  node["amenity"~"police|fire_station"](around:2000,${lat},${lng});
+  node["amenity"~"cinema|theatre|community_centre"](around:2000,${lat},${lng});
 );
-out center;`;
+out center tags;`;
 
   const fallback = {
-    infraScore: 60, amenityDensity: 5,
-    hospitalCount: 1, schoolCount: 1, transitCount: 1,
-    bankCount: 1, retailCount: 1, roadDensity: 0.5,
-    localityGrade: 'Developing', fallback: true,
+    infraScore: 55, amenityDensity: 4,
+    hospitalCount: 0, schoolCount: 0, transitCount: 0,
+    bankCount: 0, retailCount: 0, parkCount: 0,
+    restaurantCount: 0, pharmacyCount: 0,
+    nearestHospitalDistM: null, nearestSchoolDistM: null,
+    nearestMetroDistM: null, nearestParkDistM: null,
+    busStopCount: 0, industrialCount: 0, arterialRoadCount: 0,
+    walkabilityScore: 40, transitScore: 30, greenScore: 30, commercialVibrancy: 40,
+    roadDensity: 0.5, localityGrade: 'Developing', fallback: true,
   };
 
   const controller = new AbortController();
-  const timeoutId  = setTimeout(() => controller.abort(), 8000);
+  const timeoutId  = setTimeout(() => controller.abort(), 12000);
 
   try {
     const res = await fetchWithRetry('https://overpass-api.de/api/interpreter', {
@@ -371,47 +544,125 @@ out center;`;
       body:    `data=${encodeURIComponent(query)}`,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       signal:  controller.signal,
-    }, { maxAttempts: 2, baseDelayMs: 1000 });
+    }, { maxAttempts: 2, baseDelayMs: 1200 });
     clearTimeout(timeoutId);
+
     const data     = await res.json();
     const elements = data.elements || [];
 
-    const hospitalCount = elements.filter(el =>
-      el.tags?.amenity === 'hospital' || el.tags?.amenity === 'clinic').length;
-    const schoolCount   = elements.filter(el =>
-      el.tags?.amenity === 'school'   || el.tags?.amenity === 'college').length;
-    const transitCount  = elements.filter(el =>
-      el.tags?.railway === 'station'  || el.tags?.highway === 'bus_stop').length;
-    const bankCount     = elements.filter(el =>
-      el.tags?.amenity === 'bank'     || el.tags?.amenity === 'atm').length;
-    const retailCount   = elements.filter(el =>
-      el.tags?.shop === 'supermarket' || el.tags?.shop === 'mall').length;
-    const roadCount     = elements.filter(el =>
-      el.tags?.highway === 'primary'  || el.tags?.highway === 'secondary' ||
-      el.tags?.highway === 'residential').length;
+    // ── Categorise elements ─────────────────────────────────────────────────
+    const hospitals   = elements.filter(el => el.tags?.amenity === 'hospital' || el.tags?.amenity === 'clinic');
+    const pharmacies  = elements.filter(el => el.tags?.amenity === 'pharmacy');
+    const schools     = elements.filter(el => el.tags?.amenity === 'school' || el.tags?.amenity === 'college' || el.tags?.amenity === 'university');
+    const metro       = elements.filter(el => el.tags?.railway === 'station' || el.tags?.station === 'subway' || el.tags?.railway === 'tram_stop');
+    const busStops    = elements.filter(el => el.tags?.highway === 'bus_stop');
+    const banks       = elements.filter(el => el.tags?.amenity === 'bank' || el.tags?.amenity === 'atm');
+    const retail      = elements.filter(el => el.tags?.shop === 'supermarket' || el.tags?.shop === 'mall' || el.tags?.shop === 'department_store');
+    const parks       = elements.filter(el => el.tags?.leisure === 'park' || el.tags?.leisure === 'garden' || el.tags?.leisure === 'playground');
+    const restaurants = elements.filter(el => ['restaurant','cafe','fast_food','food_court'].includes(el.tags?.amenity));
+    const gyms        = elements.filter(el => ['gym','sports_centre','fitness_centre'].includes(el.tags?.amenity));
+    const industrial  = elements.filter(el => el.tags?.landuse === 'industrial');
+    const arterial    = elements.filter(el => ['primary','trunk','motorway'].includes(el.tags?.highway));
+    const safety      = elements.filter(el => el.tags?.amenity === 'police' || el.tags?.amenity === 'fire_station');
+    const leisure     = elements.filter(el => ['cinema','theatre','community_centre'].includes(el.tags?.amenity));
 
-    const roadDensity    = Math.min(1.0, roadCount / 10);
+    // ── Counts ──────────────────────────────────────────────────────────────
+    const hospitalCount   = hospitals.length;
+    const pharmacyCount   = pharmacies.length;
+    const schoolCount     = schools.length;
+    const metroCount      = metro.length;
+    const busStopCount    = busStops.length;
+    const bankCount       = banks.length;
+    const retailCount     = retail.length;
+    const parkCount       = parks.length;
+    const restaurantCount = restaurants.length;
+    const gymCount        = gyms.length;
+    const industrialCount = industrial.length;
+    const arterialCount   = arterial.length;
+    const transitCount    = metroCount + Math.round(busStopCount * 0.3);
+
+    // ── Actual distances to nearest of each key type (metres) ───────────────
+    const nearestHospitalDistM = nearestDistM(hospitals,  lat, lng);
+    const nearestSchoolDistM   = nearestDistM(schools,    lat, lng);
+    const nearestMetroDistM    = nearestDistM(metro,      lat, lng);
+    const nearestParkDistM     = nearestDistM(parks,      lat, lng);
+    const nearestBankDistM     = nearestDistM(banks,      lat, lng);
+    const nearestRetailDistM   = nearestDistM(retail,     lat, lng);
+
+    // ── Derived scores (0–100, each independently computed) ─────────────────
+
+    // Walkability: density of POIs reachable on foot within ~600m
+    const walkPOIs = restaurantCount + pharmacyCount + Math.min(5, bankCount) +
+                     Math.min(3, retailCount) + Math.min(5, busStopCount) + gymCount + leisure.length;
+    const walkabilityScore = Math.min(100, Math.round(10 + walkPOIs * 7));
+
+    // Transit score: metro proximity weighted most heavily
+    let transitScore = 30;
+    if (nearestMetroDistM !== null) {
+      transitScore += nearestMetroDistM < 500  ? 50
+                    : nearestMetroDistM < 1000 ? 38
+                    : nearestMetroDistM < 2000 ? 24
+                    : nearestMetroDistM < 3500 ? 12 : 0;
+    }
+    transitScore += Math.min(20, busStopCount * 4);
+    transitScore = Math.min(100, Math.round(transitScore));
+
+    // Green score: parks and open spaces
+    let greenScore = 20;
+    if (nearestParkDistM !== null) {
+      greenScore += nearestParkDistM < 300  ? 45
+                  : nearestParkDistM < 600  ? 32
+                  : nearestParkDistM < 1000 ? 18
+                  : nearestParkDistM < 1200 ? 8 : 0;
+    }
+    greenScore += Math.min(25, parkCount * 8);
+    greenScore = Math.min(100, Math.round(greenScore));
+
+    // Commercial vibrancy: retail + restaurant density + banks
+    const commercialVibrancy = Math.min(100, Math.round(
+      10 + (retailCount * 12) + (restaurantCount * 5) + (bankCount * 6) + (leisure.length * 8)
+    ));
+
+    // ── Main infraScore (0–100) ──────────────────────────────────────────────
+    let infraScore = 30;
+    // Healthcare (max 20)
+    infraScore += Math.min(20, hospitalCount * 7 + pharmacyCount * 3);
+    // Distance premium: hospital within 1km = +5, within 2km = +2
+    if (nearestHospitalDistM !== null)
+      infraScore += nearestHospitalDistM < 1000 ? 5 : nearestHospitalDistM < 2000 ? 2 : 0;
+    // Education (max 15)
+    infraScore += Math.min(15, schoolCount * 5);
+    // Transit (max 20)
+    infraScore += Math.round(transitScore * 0.20);
+    // Retail (max 10)
+    infraScore += Math.min(10, retailCount * 4 + restaurantCount);
+    // Safety & civic (max 5)
+    infraScore += Math.min(5, safety.length * 3);
+    // Industrial penalty (negative for residential)
+    infraScore -= Math.min(15, industrialCount * 5);
+    infraScore  = Math.min(100, Math.max(10, Math.round(infraScore)));
+
     const amenityDensity = hospitalCount + schoolCount + transitCount + bankCount + retailCount;
-
-    let infraScore = 50;
-    infraScore += Math.min(18, hospitalCount * 6);
-    infraScore += Math.min(12, schoolCount   * 4);
-    infraScore += Math.min(15, transitCount  * 5);
-    infraScore += Math.min(6,  bankCount     * 2);
-    infraScore += Math.min(9,  retailCount   * 3);
-    infraScore  = Math.min(100, Math.round(infraScore));
+    const roadDensity    = Math.min(1.0, arterialCount / 5);
 
     const localityGrade =
-      infraScore >= 85 ? 'Premium'     :
-      infraScore >= 70 ? 'Established' :
-      infraScore >= 55 ? 'Developing'  :
-      infraScore >= 40 ? 'Emerging'    : 'Peripheral';
+      infraScore >= 82 ? 'Premium'     :
+      infraScore >= 68 ? 'Established' :
+      infraScore >= 52 ? 'Developing'  :
+      infraScore >= 38 ? 'Emerging'    : 'Peripheral';
 
     const result = {
       infraScore, amenityDensity,
-      hospitalCount, schoolCount, transitCount,
-      bankCount, retailCount, roadDensity,
-      localityGrade, fallback: false,
+      hospitalCount, pharmacyCount, schoolCount,
+      metroCount, busStopCount, transitCount,
+      bankCount, retailCount, parkCount,
+      restaurantCount, gymCount, industrialCount,
+      arterialCount, safetyCount: safety.length,
+      nearestHospitalDistM, nearestSchoolDistM,
+      nearestMetroDistM, nearestParkDistM,
+      nearestBankDistM, nearestRetailDistM,
+      walkabilityScore, transitScore, greenScore, commercialVibrancy,
+      roadDensity, localityGrade, fallback: false,
     };
     GEO_CACHE[cacheKey] = result;
     return result;
@@ -561,6 +812,71 @@ const KEYWORD_RATES = {
   'dwaraka nagar':   { residential: 7500,  commercial: 10000, industrial: 3800 },
   'rushikonda':      { residential: 6500,  commercial: 8500,  industrial: 3200 },
   'madhurawada':     { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  // Thiruvananthapuram
+  'kowdiar':         { residential: 9500,  commercial: 13000, industrial: 4500 },
+  'pattom':          { residential: 8000,  commercial: 11000, industrial: 4000 },
+  'kesavadasapuram': { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'technopark':      { residential: 5500,  commercial: 8000,  industrial: 3000 },
+  'palayam':         { residential: 8500,  commercial: 11500, industrial: 4200 },
+  // Mysuru
+  'vv mohalla':      { residential: 7500,  commercial: 10000, industrial: 3800 },
+  'saraswathipuram': { residential: 6500,  commercial: 8500,  industrial: 3200 },
+  'kuvempunagar':    { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  // Mangaluru
+  'hampankatta':     { residential: 9000,  commercial: 12000, industrial: 4200 },
+  'kadri':           { residential: 7500,  commercial: 10000, industrial: 3800 },
+  'bejai':           { residential: 6500,  commercial: 8500,  industrial: 3200 },
+  // Nashik
+  'college road':    { residential: 8500,  commercial: 11500, industrial: 4200 },
+  'gangapur road':   { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'nashik road':     { residential: 5000,  commercial: 7000,  industrial: 2800 },
+  // Aurangabad / Sambhajinagar
+  'samarth nagar':   { residential: 6000,  commercial: 8000,  industrial: 3200 },
+  'osmanpura':       { residential: 5000,  commercial: 6500,  industrial: 2800 },
+  // Rajkot
+  'raiya road':      { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  'kalawad road':    { residential: 5000,  commercial: 6500,  industrial: 2800 },
+  'mavdi':           { residential: 4500,  commercial: 6000,  industrial: 2600 },
+  // Amritsar
+  'lawrence road':   { residential: 9500,  commercial: 12500, industrial: 4500 },
+  'ranjit avenue':   { residential: 7500,  commercial: 10000, industrial: 3800 },
+  // Ludhiana
+  'model town':      { residential: 9000,  commercial: 12000, industrial: 4200 },
+  'brs nagar':       { residential: 7500,  commercial: 10000, industrial: 3800 },
+  'sarabha nagar':   { residential: 6500,  commercial: 8500,  industrial: 3200 },
+  'dugri':           { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  // Varanasi
+  'sigra':           { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'lanka':           { residential: 6500,  commercial: 8500,  industrial: 3200 },
+  'bhelupur':        { residential: 6000,  commercial: 8000,  industrial: 3000 },
+  // Patna
+  'fraser road':     { residential: 9000,  commercial: 12000, industrial: 4200 },
+  'boring road':     { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'bailey road':     { residential: 6000,  commercial: 8000,  industrial: 3000 },
+  'kankarbagh':      { residential: 5000,  commercial: 6500,  industrial: 2800 },
+  // Bhubaneswar
+  'saheed nagar':    { residential: 8000,  commercial: 10500, industrial: 4000 },
+  'nayapalli':       { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'chandrasekharpur':{ residential: 6500,  commercial: 8500,  industrial: 3200 },
+  'patia':           { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  // Raipur
+  'civil lines raipur':{ residential: 7000, commercial: 9500, industrial: 3500 },
+  'shankar nagar':   { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  'telibandha':      { residential: 4500,  commercial: 6000,  industrial: 2600 },
+  // Guwahati
+  'silpukhuri':      { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'bhangagarh':      { residential: 6000,  commercial: 8000,  industrial: 3000 },
+  'panjabari':       { residential: 5000,  commercial: 6500,  industrial: 2800 },
+  'beltola':         { residential: 4500,  commercial: 6000,  industrial: 2600 },
+  // Jodhpur
+  'sardarpura':      { residential: 7000,  commercial: 9500,  industrial: 3500 },
+  'shastri nagar':   { residential: 6000,  commercial: 8000,  industrial: 3000 },
+  'paota':           { residential: 5500,  commercial: 7500,  industrial: 3000 },
+  // Madurai
+  'anna nagar madurai':{ residential: 7000, commercial: 9500, industrial: 3500 },
+  'kk nagar':        { residential: 6000,  commercial: 8000,  industrial: 3000 },
+  'alagar kovil':    { residential: 5000,  commercial: 6500,  industrial: 2800 },
+  'mattuthavani':    { residential: 4500,  commercial: 6000,  industrial: 2600 },
 };
 
 // City-level default rates when no keyword matches but city name is detected
@@ -584,6 +900,21 @@ const CITY_DEFAULT_RATES = {
   coimbatore:     4500,
   bhopal:         4000,
   visakhapatnam:  4500, vizag:       4500,
+  thiruvananthapuram: 6500, trivandrum: 6500,
+  mysuru:         4500, mysore:      4500,
+  mangaluru:      5000, mangalore:   5000,
+  nashik:         5000,
+  aurangabad:     4000, sambhajinagar: 4000,
+  rajkot:         4000,
+  amritsar:       5500,
+  ludhiana:       5500,
+  varanasi:       4500, benares:     4500,
+  patna:          4500,
+  bhubaneswar:    5000,
+  raipur:         4000,
+  guwahati:       4000,
+  jodhpur:        4000,
+  madurai:        4000,
 };
 
 export function circleRateFromKeyword(address, propertyType) {
@@ -605,23 +936,122 @@ export function circleRateFromKeyword(address, propertyType) {
   return 4200;
 }
 
+/* ── COMPARABLE PROPERTIES (real Overpass building data) ────────────────── */
+// Shoelace formula — polygon area in m² from lat/lng vertices
+function polygonAreaM2(nodes) {
+  if (!nodes || nodes.length < 3) return 0;
+  const LAT_M = 111132;
+  const LNG_M = 111320 * Math.cos((nodes[0].lat * Math.PI) / 180);
+  let area = 0;
+  for (let i = 0; i < nodes.length; i++) {
+    const j = (i + 1) % nodes.length;
+    const xi = nodes[i].lon * LNG_M;
+    const yi = nodes[i].lat * LAT_M;
+    const xj = nodes[j].lon * LNG_M;
+    const yj = nodes[j].lat * LAT_M;
+    area += xi * yj - xj * yi;
+  }
+  return Math.abs(area / 2);
+}
+
+export async function fetchComparableProperties(lat, lng, propertyType, circleRatePsf) {
+  const cacheKey = `comp_${lat.toFixed(3)}_${lng.toFixed(3)}_${propertyType}`;
+  if (GEO_CACHE[cacheKey]) return GEO_CACHE[cacheKey];
+
+  const buildingFilter = propertyType === 'commercial'
+    ? '"building"~"commercial|retail|office"'
+    : '"building"~"residential|apartments|house|yes"';
+
+  const query = `[out:json][timeout:15];
+(
+  way[${buildingFilter}](around:800,${lat},${lng});
+);
+out geom tags;`;
+
+  const controller = new AbortController();
+  const timeoutId  = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const res = await fetchWithRetry('https://overpass-api.de/api/interpreter', {
+      method:  'POST',
+      body:    `data=${encodeURIComponent(query)}`,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      signal:  controller.signal,
+    }, { maxAttempts: 2, baseDelayMs: 1000 });
+    clearTimeout(timeoutId);
+    const data     = await res.json();
+    const elements = data.elements || [];
+
+    const comparables = [];
+    for (const el of elements) {
+      if (!el.geometry || el.geometry.length < 3) continue;
+      const footprintM2 = polygonAreaM2(el.geometry);
+      if (footprintM2 < 20 || footprintM2 > 50000) continue; // sanity filter
+
+      const levels   = parseInt(el.tags?.['building:levels'] || el.tags?.levels || 1) || 1;
+      const builtUpM2= footprintM2 * Math.max(1, levels);
+      const builtUpSqft = Math.round(builtUpM2 * 10.764);
+      if (builtUpSqft < 100 || builtUpSqft > 50000) continue;
+
+      // Center of the building
+      const cLat = el.geometry.reduce((s, n) => s + n.lat, 0) / el.geometry.length;
+      const cLng = el.geometry.reduce((s, n) => s + n.lon, 0) / el.geometry.length;
+      const distM = Math.round(haversineMetres(lat, lng, cLat, cLng));
+
+      // Estimated value from circle rate — apply minor distance discount
+      const proximityFactor = distM < 200 ? 1.02 : distM < 400 ? 1.00 : distM < 600 ? 0.97 : 0.94;
+      const ageFactor = levels >= 10 ? 1.05 : levels >= 5 ? 1.00 : 0.95;
+      const estPsf    = Math.round(circleRatePsf * proximityFactor * ageFactor);
+      const midValue  = estPsf * builtUpSqft;
+      const band      = 0.08; // ±8% range
+      const mv_low    = Math.round(midValue * (1 - band) / 10000) * 10000;
+      const mv_high   = Math.round(midValue * (1 + band) / 10000) * 10000;
+
+      const name = el.tags?.name || el.tags?.['addr:housename'] || null;
+      comparables.push({
+        osmId: el.id,
+        label: name || `Building ${distM}m away`,
+        type: propertyType,
+        subtype: el.tags?.building || 'residential',
+        areaSqft: builtUpSqft,
+        floors: levels,
+        distanceM: distM,
+        estPsf, mv_low, mv_high,
+        isReal: true,
+      });
+    }
+
+    // Sort by distance, return closest 4
+    const sorted = comparables.sort((a, b) => a.distanceM - b.distanceM).slice(0, 4);
+    GEO_CACHE[cacheKey] = sorted;
+    return sorted;
+  } catch {
+    clearTimeout(timeoutId);
+    return [];
+  }
+}
+
 /* ── MARKET DYNAMICS (Overpass supply/demand/competition signals) ─────────── */
 export async function fetchMarketDynamics(lat, lng) {
   const cacheKey = `md_${lat.toFixed(3)}_${lng.toFixed(3)}`;
   if (GEO_CACHE[cacheKey]) return GEO_CACHE[cacheKey];
 
-  const query = `[out:json][timeout:10];
+  const query = `[out:json][timeout:12];
 (
   way["building"="construction"](around:1500,${lat},${lng});
   node["landuse"="construction"](around:1500,${lat},${lng});
   node["amenity"="real_estate_agent"](around:2000,${lat},${lng});
   node["shop"="estate_agent"](around:2000,${lat},${lng});
-  node["office"~"company|it|coworking|government"](around:1500,${lat},${lng});
-  way["office"~"company|it|coworking|government"](around:1500,${lat},${lng});
+  way["amenity"="real_estate_agent"](around:2000,${lat},${lng});
+  node["office"~"company|it|coworking"](around:1500,${lat},${lng});
+  way["office"~"company|it|coworking"](around:1500,${lat},${lng});
+  node["office"="government"](around:1500,${lat},${lng});
   way["building"="residential"](around:1000,${lat},${lng});
   way["building"="apartments"](around:1000,${lat},${lng});
+  node["shop"~"mall|department_store|supermarket"](around:1500,${lat},${lng});
+  way["shop"~"mall|department_store"](around:1500,${lat},${lng});
 );
-out count;`;
+out center tags;`;
 
   const fallback = {
     supplyPressure:   'medium',
@@ -650,36 +1080,52 @@ out count;`;
     const data     = await res.json();
     const elements = data.elements || [];
 
+    // Parse actual elements (out center tags returns real elements, not count objects)
     const activeConstruction = elements.filter(el =>
       el.tags?.building === 'construction' || el.tags?.landuse === 'construction').length;
+
     const estateAgentCount = elements.filter(el =>
       el.tags?.amenity === 'real_estate_agent' || el.tags?.shop === 'estate_agent').length;
+
     const officeCount = elements.filter(el =>
       el.tags?.office === 'company' || el.tags?.office === 'it' ||
       el.tags?.office === 'coworking' || el.tags?.office === 'government').length;
+
     const residentialDensity = elements.filter(el =>
       el.tags?.building === 'residential' || el.tags?.building === 'apartments').length;
 
-    const supplyPressure = activeConstruction > 5 ? 'high' : activeConstruction > 2 ? 'medium' : 'low';
-    const demandSignal   = officeCount > 8 ? 'strong' : officeCount > 3 ? 'moderate' : 'weak';
+    const retailDensity = elements.filter(el =>
+      el.tags?.shop === 'mall' || el.tags?.shop === 'department_store' ||
+      el.tags?.shop === 'supermarket').length;
 
-    // Competition index 0–100
+    // Supply pressure: construction activity in 1.5 km radius
+    // High = active development = future supply glut risk
+    const supplyPressure = activeConstruction > 6 ? 'high' : activeConstruction > 2 ? 'medium' : 'low';
+
+    // Demand signal: employment hubs + retail density = purchasing power proxy
+    const demandRaw  = officeCount + (retailDensity * 0.5);
+    const demandSignal = demandRaw > 10 ? 'strong' : demandRaw > 4 ? 'moderate' : 'weak';
+
+    // Competition index 0–100: broker density is the cleanest proxy for transaction activity
     const competitionIndex = Math.min(100, Math.round(
-      (estateAgentCount * 12) + (Math.min(10, residentialDensity) * 3) + (activeConstruction * 8)
+      (estateAgentCount * 15) + (Math.min(8, residentialDensity) * 4) + (activeConstruction * 6)
     ));
 
-    // Rental yield estimate based on employment density: 2.5–4.5% gross yield
-    const rentalYieldEst = officeCount > 8 ? 4.2 : officeCount > 3 ? 3.5 : 2.8;
+    // Rental yield estimate based on employment density: 2.5–5.0% gross yield
+    const rentalYieldEst = officeCount > 10 ? 4.8
+      : officeCount > 5 ? 3.8
+      : officeCount > 2 ? 3.2 : 2.6;
 
-    // Composite liquidity adjustment: demand pull minus supply drag
-    const demandNum       = { strong: 2, moderate: 0, weak: -1 }[demandSignal];
-    const supplyNum       = { low: 1, medium: 0, high: -2 }[supplyPressure];
-    const liquidityPremium = Math.max(-0.06, Math.min(0.06, (demandNum + supplyNum) * 0.02));
+    // Composite liquidity adjustment: demand pull minus supply drag (range ±6%)
+    const demandNum        = { strong: 3, moderate: 1, weak: -1 }[demandSignal];
+    const supplyNum        = { low: 1, medium: 0, high: -2 }[supplyPressure];
+    const brokerSignal     = estateAgentCount > 3 ? 1 : 0; // active broker market = liquid
+    const liquidityPremium = Math.max(-0.06, Math.min(0.06, (demandNum + supplyNum + brokerSignal) * 0.015));
 
     const result = {
       supplyPressure, demandSignal, competitionIndex, rentalYieldEst,
       liquidityPremium, activeConstruction, officeCount, estateAgentCount,
-      residentialDensity, fallback: false,
+      residentialDensity, retailDensity, fallback: false,
     };
     GEO_CACHE[cacheKey] = result;
     return result;

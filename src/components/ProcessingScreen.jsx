@@ -7,7 +7,7 @@ const BuildingScene = lazy(() => import('../scenes/BuildingScene'));
 
 /* ── CONSTANTS ─────────────────────────────────────────────────────────────── */
 const STEPS = [
-  { id: 1, code: '01', short: 'Geocoding + infra',  detail: 'Resolves location and fetches circle rate from govt. SRO data across 19 Indian cities' },
+  { id: 1, code: '01', short: 'Geocoding + infra',  detail: 'Resolves location and fetches circle rate from govt. SRO data across 34 Indian cities · 200+ micromarket zones' },
   { id: 2, code: '02', short: 'Market valuation',    detail: 'Applies circle rate through a 17-factor adjustment chain'          },
   { id: 3, code: '03', short: 'Liquidity scoring',   detail: 'Runs the RPI model and time-to-liquidate regression'               },
   { id: 4, code: '04', short: 'Confidence scoring',  detail: 'Checks data completeness and signal alignment'                     },

@@ -212,10 +212,10 @@ function ConfidenceVisual() {
     { label: 'Age penalty',    fill:  59, color: '#DC2626' },
     { label: 'Low infra zone', fill:  42, color: '#DC2626' },
   ];
-  // Row tops: 34, 76, 118, 160, 202
-  const ys = rows.map((_, i) => 34 + i * 42);
+  // Row tops: start at 52 (24px breathing room after line at y=28)
+  const ys = rows.map((_, i) => 52 + i * 44);
   return (
-    <svg viewBox="0 0 380 248" className="eng-visual">
+    <svg viewBox="0 0 380 278" className="eng-visual">
       {/* Header — left-aligned, far from tracks on the right */}
       <text x="10" y="20"
         style={{fontFamily:"'DM Mono',monospace",fontSize:'11px',fill:'#9B9B95',letterSpacing:'0.08em',textTransform:'uppercase'}}>
@@ -449,15 +449,15 @@ export function BengaluruMarketSection({ onAssess }) {
         animate={visible ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="section-eyebrow">Real-time coverage · 19 cities · 500+ zones</div>
+        <div className="section-eyebrow">Real-time coverage · 34 cities · 200+ zones</div>
         <h2 className="section-heading blr-heading">
           India <em>Market Intelligence</em>
         </h2>
 
         <div className="blr-callouts">
           <div className="blr-callout">
-            <div className="blr-callout-num">500+</div>
-            <div className="blr-callout-label">Coverage zones across 19 cities</div>
+            <div className="blr-callout-num">200+</div>
+            <div className="blr-callout-label">Micromarket zones across 34 cities</div>
           </div>
           <div className="blr-callout">
             <div className="blr-callout-num blr-callout-num--sm">₹3,800 – ₹42,000</div>
@@ -472,7 +472,7 @@ export function BengaluruMarketSection({ onAssess }) {
         <IndiaCitiesMap onAssess={onAssess} />
 
         <p className="blr-caption">
-          Select any of the 19 covered cities. Click a zone to see its circle rate, typical liquidity score, and average time to sell. The engine works for any address across all cities shown.
+          34 Indian cities covered with micromarket-level circle rates. Click a zone to see its rate, typical liquidity score, and average time to sell. The engine works for any address across all cities shown.
         </p>
       </motion.div>
     </section>
@@ -500,7 +500,7 @@ export function CalibrationSection() {
           <div className="calib-anchor-num">8.5%</div>
           <div className="calib-anchor-sub">
             Tested against 8 real property transactions across Bengaluru, Mumbai, Hyderabad, Chennai and Pune.
-            The 8.5% average gap between the engine range and actual sale price sits within acceptable underwriting tolerance for pre-sanction collateral assessment. Coverage now extends to 19 Indian cities.
+            The 8.5% average gap between the engine range and actual sale price sits within acceptable underwriting tolerance for pre-sanction collateral assessment. Coverage now extends to 34 Indian cities with 200+ micromarket zones.
           </div>
         </div>
 

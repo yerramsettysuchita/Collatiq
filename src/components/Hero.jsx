@@ -72,7 +72,7 @@ export default function Hero({ onAssess }) {
 
           <motion.div className="hero-eyebrow" {...fadeUp(0.1)}>
             <span className="eyebrow-line" />
-            <span className="eyebrow-text">AI Collateral Intelligence · 19 Indian Cities · Real-time</span>
+            <span className="eyebrow-text">AI Collateral Intelligence · 34 Indian Cities · Real-time</span>
           </motion.div>
 
           <motion.h1 className="hero-h1" {...fadeUp(0.2)}>
@@ -162,7 +162,7 @@ export default function Hero({ onAssess }) {
               style={{ transform: 'rotate(-90deg)', transformOrigin: '32px 32px' }}
             />
             <text x="32" y="37" textAnchor="middle"
-              style={{ fontFamily: "'DM Serif Display', serif", fontSize: '14px', fill: 'var(--ink)' }}>
+              style={{ fontFamily: "'DM Serif Display', serif", fontSize: '14px', fill: '#fff' }}>
               0.72
             </text>
           </svg>

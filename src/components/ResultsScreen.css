@@ -68,12 +68,12 @@
 .verdict-hero--sanction    { background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border-top: 4px solid #16A34A; }
 .verdict-hero--conditional { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border-top: 4px solid #D97706; }
 .verdict-hero--risk        { background: linear-gradient(135deg, #0C0C0B 0%, #1a1a2e 100%); }
-.verdict-hero--risk .vh-eyebrow { color: rgba(247,247,244,0.45); }
-.verdict-hero--risk .vh-title   { color: var(--paper); }
+.verdict-hero--risk .vh-eyebrow { color: rgba(255,255,255,0.82); }
+.verdict-hero--risk .vh-title   { color: #fff; }
 .verdict-hero--sanction .vh-title { color: #15803D; }
 .verdict-hero--conditional .vh-title { color: #92400E; }
-.verdict-hero--risk .vh-ltv     { color: rgba(247,247,244,0.55); border-color: rgba(247,247,244,0.18); }
-.verdict-hero--risk .vh-explain { color: rgba(247,247,244,0.65); }
+.verdict-hero--risk .vh-ltv     { color: rgba(255,255,255,0.92); border-color: rgba(255,255,255,0.30); }
+.verdict-hero--risk .vh-explain { color: rgba(255,255,255,0.90); }
 
 .verdict-hero-inner { max-width: 760px; }
 .vh-eyebrow {
@@ -193,7 +193,176 @@
   display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
 }
 
-/* ── WATERFALL ── */
+/* ── VALUATION DERIVATION CHAIN — table-based for guaranteed column alignment ── */
+.wf2-wrap {
+  width: 100%;
+  border: 1px solid var(--rule-2);
+  border-radius: 8px;
+  overflow: hidden;
+  isolation: isolate;   /* own stacking context — stops slider thumb bleeding in */
+  position: relative;
+}
+
+/* Table */
+.wf2-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Header */
+.wf2-thead-row {
+  background: #3730A3;
+}
+.wf2-th {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  white-space: nowrap;
+}
+.wf2-th--right { text-align: right; }
+
+/* Body rows */
+.wf2-tr { border-bottom: 1px solid var(--rule-2); }
+.wf2-tr:last-child { border-bottom: none; }
+.wf2-tr--base { background: var(--paper-2); }
+.wf2-tr--pos,
+.wf2-tr--neg  { background: #fff; }
+.wf2-tr--final {
+  background: #3730A3;
+}
+.wf2-tr--final td,
+.wf2-tr--final .wf2-td {
+  background: #3730A3;
+}
+
+/* Cells */
+.wf2-td {
+  padding: 0.55rem 0.9rem;
+  vertical-align: middle;
+}
+.wf2-td--label {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--ink-3);
+  font-weight: 400;
+  white-space: nowrap;
+}
+/* Use an inner span for flex layout inside label cells — NOT on the td itself */
+.wf2-td--label .wf2-label-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.wf2-td--right { text-align: right; }
+.wf2-td--accent {
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.wf2-td--pos {
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: #16A34A;
+  white-space: nowrap;
+}
+.wf2-td--neg {
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: #DC2626;
+  white-space: nowrap;
+}
+/* Final value cell — plain td, inner div handles flex layout */
+.wf2-td--final {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+}
+.wf2-final-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  width: 100%;
+}
+.wf2-final-label-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* Base tag pill */
+.wf2-base-tag {
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: var(--accent-bg);
+  color: var(--accent);
+  padding: 0.12rem 0.45rem;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Bar track — barely visible so bars look solid, not dual-colour */
+.wf2-bar-track {
+  height: 6px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.wf2-bar-base {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  opacity: 0.45;
+}
+.wf2-bar-fill { height: 100%; border-radius: 3px; }
+.wf2-bar-fill.pos { background: #16A34A; }
+.wf2-bar-fill.neg { background: #DC2626; }
+
+/* Area tag */
+.wf2-area-tag {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.78);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* Final row value */
+.wf2-final-range {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+}
+.wf2-final-sep {
+  color: rgba(255,255,255,0.30);
+  font-size: 0.7rem;
+}
+.wf2-final-mid {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.80);
+  white-space: nowrap;
+}
+
+/* ── WATERFALL (old, kept for fallback) ── */
 .waterfall-chart { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
 .wf-row {
   display: grid; grid-template-columns: 180px 1fr 120px;
@@ -1025,7 +1194,7 @@
 .health-score-label {
   font-family: var(--mono); font-size: 0.65rem;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(247,247,244,0.5); margin-top: 0.2rem;
+  color: rgba(255,255,255,0.85); margin-top: 0.2rem;
 }
 .health-score-gauge { flex: 1; min-width: 200px; }
 .hs-gauge-track {
@@ -1036,7 +1205,7 @@
 .hs-gauge-ticks {
   display: flex; justify-content: space-between;
   font-family: var(--mono); font-size: 0.62rem;
-  color: rgba(247,247,244,0.35); letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.75); letter-spacing: 0.04em;
 }
 .health-score-band { flex-shrink: 0; text-align: right; }
 .hs-band-text {
@@ -1047,7 +1216,7 @@
 .hs-band-sub {
   font-family: var(--mono); font-size: 0.62rem;
   letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(247,247,244,0.4); margin-top: 0.25rem;
+  color: rgba(255,255,255,0.80); margin-top: 0.25rem;
 }
 @media (max-width: 600px) {
   .health-score-banner { padding: 1.2rem 1.2rem; gap: 1rem; }
@@ -1175,3 +1344,57 @@
 .mbb-btn:hover { background: var(--paper-2); color: var(--ink); }
 .mbb-btn--wa { background: #25D366; color: #fff; border-color: #25D366; }
 .mbb-btn--wa:hover { background: #1ebe5d; }
+
+/* ── AI CREDIT NARRATIVE SECTION ── */
+.ai-narrative-section {
+  padding: 2rem 2.4rem;
+  border-bottom: 1px solid var(--rule-2);
+  background: linear-gradient(135deg, rgba(30,27,75,0.03) 0%, rgba(91,110,245,0.05) 100%);
+}
+.ai-narrative-header { margin-bottom: 1rem; }
+.ai-narrative-eyebrow {
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;
+}
+.ai-badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-family: var(--mono); font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--accent-bg); color: var(--accent);
+  border: 1px solid rgba(91,110,245,0.25);
+  padding: 0.18rem 0.55rem; border-radius: 20px;
+}
+.ai-narrative-heading {
+  font-family: var(--serif); font-size: 1.15rem;
+  letter-spacing: -0.02em; color: var(--ink);
+  font-feature-settings: "kern" on, "liga" on;
+  margin: 0; font-weight: 400;
+}
+.ai-narrative-body {
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+  border-radius: 10px;
+  padding: 1.4rem 1.6rem;
+  border-left: 3px solid var(--accent);
+}
+.ai-narrative-text {
+  font-family: var(--sans); font-size: 0.95rem;
+  color: var(--ink-2); line-height: 1.85;
+  margin: 0; font-weight: 400;
+}
+.ai-narrative-loading {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.5rem 0;
+}
+.ai-loading-dots { display: flex; gap: 4px; }
+.ai-loading-dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); opacity: 0.4;
+  animation: aiPulse 1.2s ease-in-out infinite;
+}
+.ai-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.ai-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes aiPulse { 0%,100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+.ai-loading-text {
+  font-family: var(--mono); font-size: 0.72rem;
+  color: var(--ink-4); letter-spacing: 0.06em;
+}

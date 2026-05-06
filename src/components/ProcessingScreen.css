@@ -39,7 +39,7 @@
   background: rgba(247,247,244,0.08);
   border: 1px solid rgba(247,247,244,0.14);
   border-radius: 6px;
-  color: rgba(247,247,244,0.6);
+  color: rgba(255,255,255,0.88);
   margin-right: 0.9rem;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
@@ -103,7 +103,7 @@
   font-family: var(--mono);
   font-size: 0.66rem;
   letter-spacing: 0.1em;
-  color: rgba(247,247,244,0.45);
+  color: rgba(255,255,255,0.80);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -149,7 +149,7 @@
   font-family: var(--mono);
   font-size: 0.66rem;
   letter-spacing: 0.1em;
-  color: rgba(247,247,244,0.45);
+  color: rgba(255,255,255,0.80);
   white-space: nowrap;
 }
 
@@ -898,7 +898,7 @@
   font-family: var(--mono);
   font-size: 0.58rem;
   letter-spacing: 0.1em;
-  color: rgba(247,247,244,0.55);
+  color: rgba(255,255,255,0.85);
   white-space: nowrap;
 }
 

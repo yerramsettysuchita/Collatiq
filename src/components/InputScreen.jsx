@@ -6,6 +6,7 @@ import { getCircleRateForLocation } from '../engine/geoEngine';
 import { analyzePropertyImage } from '../engine/imageEngine';
 import { useFormValidation } from '../hooks/useFormValidation';
 import { loadFilesForAssessment } from '../lib/fileStorage';
+import { previewConfidence, getConfidenceHints } from '../engine/confidenceEngine';
 
 /* ══════════════════════════════════════════════════════════════════════════
    CONSTANTS
@@ -183,44 +184,13 @@ function fmtEditDate(iso) {
 }
 
 function estimateConfidence(form, imageFiles) {
-  let c = 45;
-  if (form.address?.length > 10)              c += 10;
-  if (form.lat && form.lng)                   c += 7;
-  if (parseFloat(form.area) > 0)              c += 7;
-  if (form.yearOfConstruction)                c += 4;
-  if (form.occupancy)                         c += 4;
-  if (form.constructionType)                  c += 3;
-  if (form.propertyCondition)                 c += 3;
-  if (form.facing)                            c += 2;
-  if (form.bhkConfig)                         c += 2;
-  if (form.ownershipType)                     c += 3;
-  if (form.khataType === 'a_khata')           c += 6;
-  if (form.khataType === 'b_khata')           c -= 8;
-  if (form.khataType === 'no_khata')          c -= 12;
-  if (form.ocStatus === 'present')            c += 6;
-  if (form.ocStatus === 'absent')             c -= 4;
-  if (form.ecStatus === 'clear')              c += 7;
-  if (form.ecStatus === 'charges')            c -= 10;
-  if (form.planApproval === 'approved')       c += 4;
-  if (form.planApproval === 'not_approved')   c -= 6;
-  if (form.existingLoan === 'no')             c += 2;
-  if (form.existingLoan === 'yes')            c -= 4;
-  if (form.litigation === 'none')             c += 3;
-  if (form.litigation === 'active')           c -= 15;
-  if (form.litigation === 'injunction')       c -= 20;
-  if ((form.amenities || []).length > 2)      c += 2;
-
-  const totalDocs = Object.values(form.documents || {}).reduce((s, a) => s + (a || []).length, 0);
-  c += Math.min(10, totalDocs * 2);
-
-  const imgArr = imageFiles || [];
-  c += Math.min(5, imgArr.length * 1.2);
-  const analyses = imgArr.filter(i => i.analysis);
-  if (analyses.length > 0) {
-    const avg = analyses.reduce((s, i) => s + (i.analysis.confidenceAdjustment || 0), 0) / analyses.length;
-    c += avg > 0 ? 4 : avg < 0 ? -3 : 0;
-  }
-  return Math.min(97, Math.max(20, Math.round(c)));
+  return previewConfidence({
+    ...form,
+    areaSqft: form.area,
+    floorNumber: form.floor,
+    yearOfConstruction: form.yearOfConstruction,
+    images: imageFiles || [],
+  });
 }
 
 function countInputs(form) {
@@ -292,12 +262,14 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
     lng:  prefill?.lng  ?? null,
   });
 
-  const [imageFiles,    setImageFiles]    = useState([]);  // [{id,file,preview,analysis,loading}]
+  const [imageFiles,    setImageFiles]    = useState([]);
   const [carouselIdx,   setCarouselIdx]   = useState(null);
-  const [liveConf,      setLiveConf]      = useState(45);
+  const [liveConf,      setLiveConf]      = useState(32);
+  const [liveHints,     setLiveHints]     = useState([]);
   const [addressError,  setAddressError]  = useState(false);
   const [formError,     setFormError]     = useState('');
   const [geoData,       setGeoData]       = useState(null);
+  const [wizardStep,    setWizardStep]    = useState(0);
   const { errors: valErrors, validate, clearField } = useFormValidation();
   const errorBannerRef = useRef(null);
   const imgInputRef    = useRef(null);
@@ -423,7 +395,9 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    setLiveConf(estimateConfidence(form, imageFiles));
+    const formState = { ...form, areaSqft: form.area, floorNumber: form.floor, images: imageFiles || [] };
+    setLiveConf(previewConfidence(formState));
+    setLiveHints(getConfidenceHints(formState));
   }, [form, imageFiles]); // eslint-disable-line
 
   /* ── cross-field errors (live) ── */
@@ -512,24 +486,34 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
         )}
       </AnimatePresence>
 
-      {/* ── Topbar ── */}
+      {/* ── Wizard Topbar ── */}
       <div className="input-topbar">
-        <button className="back-btn" onClick={onBack}>
+        <button className="back-btn" onClick={wizardStep > 0 ? () => setWizardStep(s => s - 1) : onBack}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5"
               strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-          Back
+          {wizardStep > 0 ? 'Previous' : 'Back'}
         </button>
-        <span className="input-topbar-title">{editingFrom ? 'Edit assessment' : 'New assessment'}</span>
-        <div className="input-progress">
-          <span className="input-progress-label">
-            {filledCount + (form.address ? 1 : 0)} of {totalFields + 1} fields
+        <div className="wizard-steps">
+          {['Location','Property','Legal','Evidence'].map((label, i) => (
+            <div key={i} className={`wizard-step-item ${i === wizardStep ? 'active' : i < wizardStep ? 'done' : ''}`}>
+              <div className="wizard-step-node">
+                {i < wizardStep
+                  ? <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 2.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  : <span>{i + 1}</span>
+                }
+              </div>
+              <span className="wizard-step-label">{label}</span>
+              {i < 3 && <div className={`wizard-step-connector ${i < wizardStep ? 'done' : ''}`} />}
+            </div>
+          ))}
+        </div>
+        <div className="wizard-conf-mini">
+          <span className="wcm-score" style={{ color: liveConf >= 68 ? '#16A34A' : liveConf >= 52 ? '#D97706' : '#5B6EF5' }}>
+            {(liveConf / 100).toFixed(2)}
           </span>
-          <div className="input-progress-bar">
-            <div className="input-progress-fill"
-              style={{ width: `${((filledCount + (form.address?1:0)) / (totalFields+1)) * 100}%` }} />
-          </div>
+          <span className="wcm-label">conf</span>
         </div>
       </div>
 
@@ -537,7 +521,48 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
         {/* ═══════════════════════ LEFT ═══════════════════════════════════ */}
         <div className="input-left">
 
-          {/* 1 — Location */}
+          {/* ── Step context header ── */}
+          <AnimatePresence mode="wait">
+            {wizardStep === 0 && (
+              <motion.div key="s0" className="step-hero"
+                initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
+                exit={{ opacity:0, y:-12 }} transition={{ duration:0.3 }}>
+                <div className="step-hero-eyebrow">Step 1 of 4 · Location Intelligence</div>
+                <h2 className="step-hero-heading">Where is the property?</h2>
+                <p className="step-hero-sub">Enter the address and the engine will instantly resolve the government circle rate, zone tier, and infrastructure signals for your location.</p>
+              </motion.div>
+            )}
+            {wizardStep === 1 && (
+              <motion.div key="s1" className="step-hero"
+                initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
+                exit={{ opacity:0, y:-12 }} transition={{ duration:0.3 }}>
+                <div className="step-hero-eyebrow">Step 2 of 4 · Property Profile</div>
+                <h2 className="step-hero-heading">Tell us about the property</h2>
+                <p className="step-hero-sub">Type, size, age, and condition are the four primary value drivers. Each field directly adjusts the valuation range and confidence score.</p>
+              </motion.div>
+            )}
+            {wizardStep === 2 && (
+              <motion.div key="s2" className="step-hero"
+                initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
+                exit={{ opacity:0, y:-12 }} transition={{ duration:0.3 }}>
+                <div className="step-hero-eyebrow">Step 3 of 4 · Legal Status</div>
+                <h2 className="step-hero-heading">What is the legal position?</h2>
+                <p className="step-hero-sub">Legal clarity is the single biggest confidence driver. A clear title with OC and EC can add up to +24 points to the confidence score and unlock the highest LTV band.</p>
+              </motion.div>
+            )}
+            {wizardStep === 3 && (
+              <motion.div key="s3" className="step-hero"
+                initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }}
+                exit={{ opacity:0, y:-12 }} transition={{ duration:0.3 }}>
+                <div className="step-hero-eyebrow">Step 4 of 4 · Supporting Evidence</div>
+                <h2 className="step-hero-heading">Add documents and photos</h2>
+                <p className="step-hero-sub">Documents are optional but each one improves accuracy. Uploading all three critical documents raises the confidence score by up to 12 points.</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* ══════════════ STEP 0 — LOCATION ══════════════ */}
+          {wizardStep === 0 && (<>
           <div className="input-section">
             <div className={addressError ? 'shake' : ''}>
               <AddressAutocomplete
@@ -569,9 +594,9 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
                   </span>
                   <span className="geo-preview-source"
                     style={{ color: geoData.confidence === 'high' ? '#64748B' : '#D97706' }}>
-                    {geoData.confidence === 'high' ? 'Govt. circle rate verified — 19 city database'
+                    {geoData.confidence === 'high' ? 'Govt. circle rate verified — 34 city database'
                       : geoData.confidence === 'medium' ? 'Estimated rate (zone not in direct registry)'
-                      : 'Outside our current 19-city coverage area'}
+                      : 'Outside our current 34-city coverage area'}
                   </span>
                 </motion.div>
               )}
@@ -581,6 +606,19 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
             </p>
           </div>
 
+          {/* Step 0 continue button */}
+          <button className="step-continue-btn"
+            onClick={() => {
+              if (!form.address?.trim()) { setAddressError(true); setTimeout(() => setAddressError(false), 600); return; }
+              setWizardStep(1);
+            }}>
+            Continue — add property details
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+          </>) } {/* end step 0 */}
+
+          {/* ══════════════ STEP 1 — PROPERTY PROFILE ══════════════ */}
+          {wizardStep === 1 && (<>
           {/* 2 — Classification */}
           <SectionLabel label="Property Classification" />
 
@@ -823,6 +861,16 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
             )}
           </AnimatePresence>
 
+          {/* Step 1 continue button */}
+          <button className="step-continue-btn"
+            onClick={() => setWizardStep(2)}>
+            Continue — add legal details
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+          </>) } {/* end step 1 */}
+
+          {/* ══════════════ STEP 2 — LEGAL ══════════════ */}
+          {wizardStep === 2 && (<>
           {/* 6 — Legal & Ownership */}
           <SectionLabel label="Legal & Ownership" />
 
@@ -920,6 +968,16 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
             )}
           </div>
 
+          {/* Step 2 continue button */}
+          <button className="step-continue-btn"
+            onClick={() => setWizardStep(3)}>
+            Continue — add evidence
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+          </>) } {/* end step 2 */}
+
+          {/* ══════════════ STEP 3 — EVIDENCE ══════════════ */}
+          {wizardStep === 3 && (<>
           {/* 8 — Documents */}
           <SectionLabel label="Supporting Documents" />
 
@@ -970,11 +1028,13 @@ export default function InputScreen({ onSubmit, onBack, prefill, onDiscardEdit }
                 strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
+          </>) } {/* end step 3 */}
+
         </div>
 
         {/* ═══════════════════════ RIGHT ══════════════════════════════════ */}
         <div className="input-right">
-          <ConfidencePreview confidence={liveConf} />
+          <ConfidencePreview confidence={liveConf} hints={liveHints} />
 
           <div className="preview-section">
             <div className="preview-heading">What the engine will compute</div>
@@ -1251,38 +1311,83 @@ function MultiDocSlot({ docKey, label, critical, files, onAdd, onRemove }) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   CONFIDENCE PREVIEW
+   LIVE CONFIDENCE INTELLIGENCE PANEL
 ══════════════════════════════════════════════════════════════════════════ */
-function ConfidencePreview({ confidence }) {
-  const r=30, start=120, total=300, filled=(confidence/100)*total;
-  const ac = confidence>=75 ? '#16A34A' : confidence>=55 ? '#D97706' : '#DC2626';
-  const msg = confidence>=75
-    ? { text:'Strong data quality. An accurate estimate is expected.', color:'#16A34A' }
-    : confidence>=55
-    ? { text:'Moderate data quality. Add legal and document details to improve.', color:'#D97706' }
-    : { text:'Limited data provided. Confidence in the estimate will be low.', color:'#DC2626' };
-  const toRad = d => (d-90)*(Math.PI/180);
-  const arc = (cx,cy,r2,s,e) => {
-    const sx=cx+r2*Math.cos(toRad(s)), sy=cy+r2*Math.sin(toRad(s));
-    const ex=cx+r2*Math.cos(toRad(e)), ey=cy+r2*Math.sin(toRad(e));
-    return `M ${sx} ${sy} A ${r2} ${r2} 0 ${e-s>180?1:0} 1 ${ex} ${ey}`;
-  };
+function ConfidencePreview({ confidence, hints = [] }) {
+  const pct    = confidence / 82; // 82 is the hard max
+  const radius = 36;
+  const circ   = 2 * Math.PI * radius;
+  const filled = pct * circ * 0.75; // 270° arc
+  const offset = circ * 0.125;      // start at 225° (bottom-left)
+
+  const ac = confidence >= 68 ? '#16A34A' : confidence >= 52 ? '#D97706' : '#5B6EF5';
+  const tier = confidence >= 68
+    ? { label: 'Good confidence', sub: 'Sufficient for assessment', color: '#16A34A', bg: '#F0FDF4' }
+    : confidence >= 52
+    ? { label: 'Moderate confidence', sub: 'Add legal details to improve', color: '#D97706', bg: '#FFFBEB' }
+    : { label: 'Low confidence', sub: 'Fill more fields to proceed', color: '#5B6EF5', bg: '#EEF0FF' };
+
   return (
-    <div className="preview-section conf-preview-section">
-      <div className="preview-heading">Estimated confidence</div>
-      <div className="conf-preview-wrap">
-        <svg viewBox="0 0 80 80" width="80" height="80">
-          <path d={arc(40,40,r,start,start+total)} fill="none" stroke="#E8E7E1" strokeWidth="5" strokeLinecap="round"/>
-          <path d={arc(40,40,r,start,start+filled)} fill="none" stroke={ac} strokeWidth="5" strokeLinecap="round"/>
-          <text x="40" y="37" textAnchor="middle"
-            style={{ fontFamily:'var(--mono)', fontSize:'12px', fill:ac, fontWeight:500 }}>{confidence}%</text>
-          <text x="40" y="50" textAnchor="middle"
-            style={{ fontFamily:'var(--mono)', fontSize:'7px', fill:'#9B9B95', letterSpacing:'0.06em' }}>CONF</text>
-        </svg>
-        <div className="conf-preview-right">
-          <p className="conf-preview-msg" style={{ color:msg.color }}>{msg.text}</p>
+    <div className="conf-intel-panel">
+      <div className="conf-intel-header">
+        <span className="conf-intel-title">Live Confidence Score</span>
+        <span className="conf-intel-badge" style={{ background: tier.bg, color: tier.color }}>
+          {tier.label}
+        </span>
+      </div>
+
+      <div className="conf-intel-body">
+        {/* Ring */}
+        <div className="conf-ring-block">
+          <svg viewBox="0 0 96 96" width="96" height="96" style={{ transform:'rotate(135deg)' }}>
+            <circle cx="48" cy="48" r={radius} fill="none"
+              stroke="#E8E7E1" strokeWidth="7" strokeDasharray={`${circ * 0.75} ${circ * 0.25}`}
+              strokeLinecap="round" />
+            <motion.circle cx="48" cy="48" r={radius} fill="none"
+              stroke={ac} strokeWidth="7"
+              strokeDasharray={`${filled} ${circ - filled}`}
+              strokeDashoffset={-offset}
+              strokeLinecap="round"
+              initial={{ strokeDasharray: `0 ${circ}` }}
+              animate={{ strokeDasharray: `${filled} ${circ - filled}` }}
+              transition={{ duration: 0.6, ease: [0.16,1,0.3,1] }} />
+          </svg>
+          <div className="conf-ring-center" style={{ transform:'rotate(0deg)' }}>
+            <motion.span className="conf-ring-num" style={{ color: ac }}
+              key={confidence}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}>
+              {(confidence / 100).toFixed(2)}
+            </motion.span>
+            <span className="conf-ring-denom">/ 0.82 max</span>
+          </div>
+        </div>
+
+        {/* Progress bar */}
+        <div className="conf-progress-block">
+          <div className="conf-progress-track">
+            <motion.div className="conf-progress-fill"
+              style={{ background: ac }}
+              animate={{ width: `${pct * 100}%` }}
+              transition={{ duration: 0.5, ease: [0.16,1,0.3,1] }} />
+          </div>
+          <p className="conf-progress-sub">{tier.sub}</p>
         </div>
       </div>
+
+      {/* Next steps to improve */}
+      {hints.length > 0 && (
+        <div className="conf-hints-block">
+          <span className="conf-hints-label">Fill next to improve</span>
+          {hints.slice(0, 3).map((h, i) => (
+            <div className="conf-hint-row" key={i}>
+              <span className="conf-hint-gain">+{h.gain}</span>
+              <span className="conf-hint-text">{h.text}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

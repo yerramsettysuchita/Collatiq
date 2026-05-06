@@ -2,11 +2,12 @@
    Orchestrates all four engines in sequence and returns a single merged result.
 */
 
-import { fetchInfrastructureSignals, fetchMarketDynamics, getCircleRateForLocation, circleRateFromKeyword } from './geoEngine';
+import { fetchInfrastructureSignals, fetchMarketDynamics, fetchComparableProperties, getCircleRateForLocation, circleRateFromKeyword } from './geoEngine';
 import { runValuation }               from './valuationEngine';
 import { computeConfidence }          from './confidenceEngine';
 import { runFraudChecks }             from './fraudEngine';
 import { makeDecision }               from './decisionEngine';
+import { analyzePropertyImage, analyzeDocument } from './imageEngine';
 
 export async function runCollatiqPipeline(formInput) {
   try {
@@ -70,6 +71,61 @@ export async function runCollatiqPipeline(formInput) {
           supplyPressure: 'medium', demandSignal: 'moderate', competitionIndex: 50,
           rentalYieldEst: 3.0, liquidityPremium: 0, fallback: true,
         };
+      }
+    }
+
+    // Step 1f — fetch real comparable properties from Overpass building geometry
+    if (input.lat && input.lng && !input.overpassComparables) {
+      try {
+        const propType    = (input.propertyType || input.type || 'residential').toLowerCase();
+        const circleRate  = input.circleRateData?.ratePerSqft || 5000;
+        input.overpassComparables = await fetchComparableProperties(
+          input.lat, input.lng, propType, circleRate
+        );
+      } catch {
+        input.overpassComparables = [];
+      }
+    }
+
+    // Step 1e — auto image analysis via Claude Vision (if photos uploaded and not already done)
+    if (!input.imageAnalysis && Array.isArray(input.images) && input.images.length > 0) {
+      const firstImage = input.images[0];
+      if (firstImage instanceof File || firstImage instanceof Blob) {
+        try {
+          const imgResult = await analyzePropertyImage(firstImage);
+          if (imgResult && typeof imgResult.confidenceAdjustment === 'number') {
+            input.imageAnalysis = imgResult;
+          }
+        } catch {
+          // Image analysis is best-effort — never block the pipeline
+        }
+      }
+    }
+
+    // Step 1g — document OCR via Claude Vision (runs in parallel for all uploaded docs)
+    if (!input.documentAnalysis && input.documents && typeof input.documents === 'object') {
+      const DOC_TYPES = ['titleDeed', 'ec', 'taxReceipt', 'buildingPlan', 'khata'];
+      const analysisJobs = DOC_TYPES
+        .filter(dt => Array.isArray(input.documents[dt]) && input.documents[dt].length > 0)
+        .filter(dt => (input.documents[dt][0] instanceof File || input.documents[dt][0] instanceof Blob))
+        .map(dt => analyzeDocument(input.documents[dt][0], dt)
+          .then(result => ({ dt, result }))
+          .catch(() => ({ dt, result: null }))
+        );
+
+      if (analysisJobs.length > 0) {
+        try {
+          const results = await Promise.all(analysisJobs);
+          const docAnalysis = {};
+          for (const { dt, result } of results) {
+            if (result && result.extracted) docAnalysis[dt] = result.extracted;
+          }
+          if (Object.keys(docAnalysis).length > 0) {
+            input.documentAnalysis = docAnalysis;
+          }
+        } catch {
+          // Document analysis is best-effort
+        }
       }
     }
 
@@ -175,6 +231,9 @@ export async function runCollatiqPipeline(formInput) {
       // Collateral Health Score
       collateralHealthScore,
       collateralHealthBand,
+
+      // Document intelligence (Claude-extracted)
+      documentAnalysis: input.documentAnalysis || null,
     };
 
     // Persist to sessionStorage under the valuationId

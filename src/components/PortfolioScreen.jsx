@@ -137,7 +137,26 @@ Defence Colony New Delhi 110024,residential,apartment,1800,3,old,self,clear
 Dwarka Sector 12 Delhi 110075,residential,apartment,1100,6,mid,self,clear
 Gurgaon Sector 49 Haryana 122018,residential,apartment,1350,10,new,rented,clear
 Noida Sector 150 Uttar Pradesh 201310,residential,apartment,1200,15,new,self,clear
-Vasant Vihar New Delhi 110057,residential,villa,4200,1,old,vacant,unknown`;
+Vasant Vihar New Delhi 110057,residential,villa,4200,1,old,vacant,unknown
+Navrangpura Ahmedabad 380009,residential,apartment,1100,4,mid,self,clear
+Satellite Road Ahmedabad 380015,commercial,office,2200,5,new,rented,clear
+Alipore Road Kolkata 700027,residential,apartment,1600,3,old,self,clear
+Salt Lake Sector 5 Kolkata 700091,commercial,office,3000,6,new,rented,clear
+Marine Drive Kochi 682031,residential,apartment,1300,8,new,self,clear
+Edapally Kochi 682024,residential,apartment,1000,4,mid,rented,clear
+Lawrence Road Amritsar 143001,residential,apartment,1200,2,mid,self,clear
+Model Town Ludhiana 141002,residential,villa,3500,1,mid,self,clear
+Kowdiar Thiruvananthapuram 695003,residential,apartment,1150,5,new,self,clear
+VV Mohalla Mysuru 570002,residential,apartment,1000,3,mid,self,clear
+Hampankatta Mangaluru 575001,commercial,shop,800,0,new,rented,clear
+College Road Nashik 422005,residential,apartment,1050,4,mid,self,clear
+Saheed Nagar Bhubaneswar 751007,residential,apartment,1100,3,new,self,clear
+Civil Lines Raipur 492001,residential,apartment,1200,2,mid,self,clear
+Silpukhuri Guwahati 781003,residential,apartment,950,4,mid,rented,clear
+Sigra Varanasi 221010,residential,apartment,1000,2,old,self,complex
+Fraser Road Patna 800001,residential,apartment,1300,3,mid,self,clear
+Sardarpura Jodhpur 342003,residential,apartment,1000,2,mid,self,clear
+Anna Nagar Madurai 625020,residential,apartment,1050,3,mid,self,clear`;
 
 /* ── SUB-COMPONENTS ───────────────────────────────────────────────────────── */
 function SummaryStrip({ rows }) {
@@ -321,7 +340,7 @@ function UploadZone({ onParsed }) {
       </div>
       {error && <p className="pf-upload-error">{error}</p>}
       <button className="pf-sample-link" onClick={downloadSample}>
-        Download sample CSV (30 properties · 6 cities · 19 supported)
+        Download sample CSV (50 properties · 34 cities · 200+ zones)
       </button>
       <p className="pf-upload-hint">
         Required columns: address, property_type, sub_type, area_sqft, floor, age_band, occupancy, legal_status

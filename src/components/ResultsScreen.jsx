@@ -446,52 +446,121 @@ function ValueDrivers({ drivers, started }) {
   );
 }
 
-/* ── WATERFALL CHART ───────────────────────────────────────────────────────── */
+/* ── VALUATION DERIVATION CHAIN ─────────────────────────────────────────────
+   Shows the step-by-step rupee calculation: base → adjustments → final value.
+   Every assumption is visible. This is what "explainability" means.
+────────────────────────────────────────────────────────────────────────────── */
 const WaterfallChart = memo(function WaterfallChart({ results, started }) {
   const [ref, vis] = useReveal();
   const s = vis && started;
-  const base = results.circleRatePerSqft;
-  const items = [
-    { label: 'Circle rate baseline', value: 0, isBase: true },
-    ...results.drivers.map(d => ({ label: d.label, value: d.impact, dir: d.dir })),
-  ];
-  const maxVal = Math.max(...results.drivers.map(d => Math.abs(d.impact)), 5);
+
+  const baseRate  = results.baseRatePsf || results.circleRatePerSqft || 4200;
+  const area      = results.areaSqft || results.area || 1000;
+  const drivers   = (results.drivers || []).slice(0, 8); // top 8 drivers
+  const maxImpact = Math.max(...drivers.map(d => Math.abs(d.impact || 0)), 5);
+
+  // Build running-total chain: each step shows cumulative rate per sqft
+  let runningRate = baseRate;
+  const chain = drivers.map(d => {
+    const before = runningRate;
+    const change = Math.round(runningRate * (d.impact / 100));
+    runningRate = Math.round(runningRate + change);
+    return { ...d, before, change, after: runningRate };
+  });
+
+  const finalMid    = Math.round((results.mv_low + results.mv_high) / 2);
+  const fmt         = v => v >= 10000000
+    ? `₹${(v / 10000000).toFixed(2)}Cr`
+    : `₹${(v / 100000).toFixed(1)}L`;
 
   return (
-    <div className="waterfall-wrap" ref={ref}>
-      <div className="waterfall-chart">
-        {items.map((item, i) => (
-          <motion.div key={i} className={`wf-row ${item.isBase ? 'wf-base' : ''}`}
-            initial={{ opacity: 0 }} animate={s ? { opacity: 1 } : {}} transition={{ delay: i * 0.06 }}
-          >
-            <div className="wf-label">{item.label}</div>
-            <div className="wf-bar-area">
-              {item.isBase ? (
-                <div className="wf-baseline-line" />
-              ) : (
-                <div className={`wf-bar-side ${item.dir >= 0 ? 'right' : 'left'}`}>
+    <div className="wf2-wrap" ref={ref}>
+      <table className="wf2-table">
+        <colgroup>
+          <col style={{ width: '190px' }} />
+          <col style={{ width: 'auto' }} />
+          <col style={{ width: '140px' }} />
+          <col style={{ width: '110px' }} />
+        </colgroup>
+
+        {/* ── HEADER ── */}
+        <thead>
+          <tr className="wf2-thead-row">
+            <th className="wf2-th">Factor</th>
+            <th className="wf2-th">Impact</th>
+            <th className="wf2-th wf2-th--right">Rate / sqft</th>
+            <th className="wf2-th wf2-th--right">Change</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {/* ── BASE ROW ── */}
+          <motion.tr className="wf2-tr wf2-tr--base"
+            initial={{ opacity: 0 }} animate={s ? { opacity: 1 } : {}}
+            transition={{ duration: 0.35 }}>
+            <td className="wf2-td wf2-td--label">
+              <span className="wf2-label-inner">
+                <span className="wf2-base-tag">BASE</span> Govt. circle rate
+              </span>
+            </td>
+            <td className="wf2-td">
+              <div className="wf2-bar-track">
+                <div className="wf2-bar-base" style={{ width: '40%' }} />
+              </div>
+            </td>
+            <td className="wf2-td wf2-td--right wf2-td--accent">
+              ₹{baseRate.toLocaleString('en-IN')}/sqft
+            </td>
+            <td className="wf2-td wf2-td--right" />
+          </motion.tr>
+
+          {/* ── ADJUSTMENT ROWS ── */}
+          {chain.map((step, i) => (
+            <motion.tr key={i}
+              className={`wf2-tr ${step.dir >= 0 ? 'wf2-tr--pos' : 'wf2-tr--neg'}`}
+              initial={{ opacity: 0 }} animate={s ? { opacity: 1 } : {}}
+              transition={{ delay: (i + 1) * 0.07, duration: 0.35 }}>
+              <td className="wf2-td wf2-td--label"><span className="wf2-label-inner">{step.label}</span></td>
+              <td className="wf2-td">
+                <div className="wf2-bar-track">
                   <motion.div
-                    className={`wf-bar-fill ${item.dir >= 0 ? 'pos' : 'neg'}`}
+                    className={`wf2-bar-fill ${step.dir >= 0 ? 'pos' : 'neg'}`}
                     initial={{ width: 0 }}
-                    animate={s ? { width: `${(Math.abs(item.value) / maxVal) * 50}%` } : {}}
-                    transition={{ delay: i * 0.07 + 0.2, duration: 0.6, ease: [0.16,1,0.3,1] }}
+                    animate={s ? { width: `${(Math.abs(step.impact) / maxImpact) * 80}%` } : {}}
+                    transition={{ delay: (i + 1) * 0.08 + 0.2, duration: 0.5, ease: [0.16,1,0.3,1] }}
                   />
                 </div>
-              )}
-            </div>
-            <div className={`wf-pct ${item.isBase ? 'base' : item.dir >= 0 ? 'pos' : 'neg'}`}>
-              {item.isBase ? `₹${base}/sqft` : `${item.dir >= 0 ? '+' : ''}${item.value}%`}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <motion.div className="waterfall-narrative"
-        initial={{ opacity: 0 }} animate={s ? { opacity: 1 } : {}} transition={{ delay: 0.6 }}
-      >
-        {(results.narrative || '').split('\n\n').map((para, i) => (
-          <p key={i} className="waterfall-narrative-para">{para}</p>
-        ))}
-      </motion.div>
+              </td>
+              <td className={`wf2-td wf2-td--right ${step.dir >= 0 ? 'wf2-td--pos' : 'wf2-td--neg'}`}>
+                ₹{step.after.toLocaleString('en-IN')}/sqft
+              </td>
+              <td className={`wf2-td wf2-td--right ${step.dir >= 0 ? 'wf2-td--pos' : 'wf2-td--neg'}`}>
+                {step.change >= 0 ? '+' : ''}₹{step.change.toLocaleString('en-IN')}
+              </td>
+            </motion.tr>
+          ))}
+
+          {/* ── FINAL ROW ── */}
+          <motion.tr className="wf2-tr wf2-tr--final"
+            initial={{ opacity: 0 }} animate={s ? { opacity: 1 } : {}}
+            transition={{ delay: chain.length * 0.07 + 0.3, duration: 0.4 }}>
+            <td className="wf2-td wf2-td--final">
+              <div className="wf2-final-label-inner">
+                <strong>Market value</strong>
+                <span className="wf2-area-tag">× {area.toLocaleString('en-IN')} sqft</span>
+              </div>
+            </td>
+            <td className="wf2-td" />
+            <td className="wf2-td wf2-td--right wf2-td--final" colSpan={2}>
+              <div className="wf2-final-inner">
+                <span className="wf2-final-range">{fmt(results.mv_low)} – {fmt(results.mv_high)}</span>
+                <span className="wf2-final-sep">|</span>
+                <span className="wf2-final-mid">mid {fmt(finalMid)}</span>
+              </div>
+            </td>
+          </motion.tr>
+        </tbody>
+      </table>
     </div>
   );
 });
@@ -636,6 +705,116 @@ function AnomalyDetectionPanel({ results, started }) {
           })}
         </div>
       )}
+    </div>
+  );
+}
+
+/* ── AI CREDIT NARRATIVE ───────────────────────────────────────────────────────
+   Calls /api/credit-narrative to get a Claude-generated credit committee
+   paragraph. Falls back to the template narrative if the API is unavailable.
+────────────────────────────────────────────────────────────────────────────── */
+function AICreditNarrative({ results }) {
+  // Show template immediately so the section is never blank
+  const [text,    setText]    = useState(results.narrative || '');
+  const [loading, setLoading] = useState(true);
+  const [isAI,    setIsAI]    = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    // Reset to template text instantly on new assessment
+    setText(results.narrative || '');
+    setIsAI(false);
+    setLoading(true);
+
+    const payload = {
+      address:             results.address,
+      propertyType:        results.propertyType,
+      subtype:             results.subtype,
+      areaSqft:            results.areaSqft,
+      mv_low:              results.mv_low,
+      mv_high:             results.mv_high,
+      dv_low:              results.dv_low,
+      dv_high:             results.dv_high,
+      rpi:                 results.rpi,
+      ttl_low:             results.ttl_low,
+      ttl_high:            results.ttl_high,
+      confidence:          results.confidence,
+      ltvBand:             results.ltvBand || results.ltv_band,
+      verdict:             results.verdict,
+      circleRatePerSqft:   results.circleRatePerSqft,
+      zoneConfidence:      results.zoneConfidence,
+      ageBand:             results.ageBand,
+      occupancy:           results.occupancy,
+      legalStatus:         results.legalStatus,
+      flags:               results.flags,
+      drivers:             results.drivers,
+      collateralHealthScore: results.collateralHealthScore,
+    };
+
+    fetch('/api/credit-narrative', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (cancelled) return;
+        if (data.narrative) {
+          setText(data.narrative);
+          setIsAI(!data.fallback);
+        } else {
+          setText(results.narrative || '');
+          setIsAI(false);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setText(results.narrative || '');
+          setIsAI(false);
+        }
+      })
+      .finally(() => { if (!cancelled) setLoading(false); });
+
+    return () => { cancelled = true; };
+  }, [results.valuationId]); // eslint-disable-line
+
+  return (
+    <div className="ai-narrative-section">
+      <div className="ai-narrative-header">
+        <div className="ai-narrative-eyebrow">
+          <span className="section-eyebrow-res">AI Credit Analysis</span>
+          {isAI && (
+            <span className="ai-badge">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <circle cx="5" cy="5" r="4" fill="#5B6EF5"/>
+                <path d="M3 5l1.5 1.5L7 3" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Generated by Claude
+            </span>
+          )}
+        </div>
+        <h3 className="ai-narrative-heading">Credit committee assessment</h3>
+      </div>
+
+      <div className="ai-narrative-body">
+        {loading ? (
+          <div className="ai-narrative-loading">
+            <div className="ai-loading-dots">
+              <span /><span /><span />
+            </div>
+            <span className="ai-loading-text">Generating credit analysis…</span>
+          </div>
+        ) : (
+          <motion.p
+            className="ai-narrative-text"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16,1,0.3,1] }}
+          >
+            {text}
+          </motion.p>
+        )}
+      </div>
     </div>
   );
 }
@@ -1889,9 +2068,10 @@ export default function ResultsScreen({ results, onReset, saveStatus, onViewRece
         <WaterfallChart results={results} started={wfVis && started} />
       </div>
 
-      {/* Confidence + Anomaly + Decision + Next Actions */}
+      {/* Confidence + AI Narrative + Anomaly + Decision + Next Actions */}
       <div className="mobile-hidden">
         <ConfidenceDriversPanel results={stressed} started={started} />
+        <AICreditNarrative results={results} />
         <AnomalyDetectionPanel  results={results}  started={started} />
         <NextBestActions results={results} />
         <DecisionMemoSection results={results} onExportPDF={handleExportPDF} />
